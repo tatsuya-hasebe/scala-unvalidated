@@ -1,0 +1,12 @@
+/*
+
+!/src
+
+!/project/
+/project/*
+!/project/build.properties
+!/project/plugins.sbt
+
+!.gitignore
+!.scalafmt.conf
+!build.sbt
