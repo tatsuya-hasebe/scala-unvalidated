@@ -1,5 +1,6 @@
 import scala.concurrent.Future
 
+import validation.implicits._
 import types.{
   Account,
   AccountCode,

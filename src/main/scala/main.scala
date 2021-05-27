@@ -6,7 +6,7 @@ import cats.implicits._
 
 import adapters.{InMemoryAccountRepository, InMemoryAccountingPeriodRepository, InMemoryConsumptionTaxRepository}
 import types.{AccountCode, AccountName, AccountingPeriodId, ConsumptionTaxId, CreateAccountRequest}
-import unvalidated.implicits._
+import validation.implicits._
 
 object main extends App {
   val createAccountUseCase = new CreateAccountUseCaseInteractor(

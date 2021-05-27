@@ -1,5 +1,5 @@
-import unvalidated.Unvalidated
-import unvalidated.implicits._
+import validation.{Unvalidated, Validated}
+import validation.implicits._
 import types.{Account, AccountCode, ConsumptionTax, ConsumptionTaxId, DuplicateAccountCode, NonExistentConsumptionTax}
 
 object functions {
@@ -7,7 +7,7 @@ object functions {
       accounts: Seq[Account]
   )(
       unvalidatedCode: Unvalidated[AccountCode]
-  ): Either[DuplicateAccountCode, AccountCode] =
+  ): Either[DuplicateAccountCode, Validated[AccountCode]] =
     unvalidatedCode.validate { code =>
       Either.cond(
         !accounts.exists(_.code == code),
@@ -20,7 +20,7 @@ object functions {
       consumptionTaxes: Seq[ConsumptionTax]
   )(
       unvalidatedId: Unvalidated[ConsumptionTaxId]
-  ): Either[NonExistentConsumptionTax, ConsumptionTaxId] =
+  ): Either[NonExistentConsumptionTax, Validated[ConsumptionTaxId]] =
     unvalidatedId.validate { id =>
       Either.cond(
         consumptionTaxes.exists(_.id == id),

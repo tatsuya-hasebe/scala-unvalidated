@@ -2,7 +2,7 @@ import cats.Monad
 import cats.data.EitherT
 import cats.implicits._
 
-import unvalidated.implicits._
+import validation.implicits._
 import types.{
   Account,
   AccountRepository,
@@ -50,7 +50,7 @@ class CreateAccountUseCaseInteractor[F[_]: Monad](
                                     validateConsumptionTaxId(consumptionTaxes)(request.consumptionTaxId)
                                   )
 
-      newAccount = NewAccount(period.id, validatedCode, request.name, validatedConsumptionTaxId)
+      newAccount = NewAccount(period.map(_.id), validatedCode, request.name, validatedConsumptionTaxId)
 
       account <- fromF(
                   accountRepository.store(newAccount)

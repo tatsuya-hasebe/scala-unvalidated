@@ -1,4 +1,4 @@
-import unvalidated.Unvalidated
+import validation.{Unvalidated, Validated}
 
 object types {
   case class Account(
@@ -35,10 +35,10 @@ object types {
   )
 
   case class NewAccount(
-      periodId: AccountingPeriodId,
-      code: AccountCode,
+      periodId: Validated[AccountingPeriodId],
+      code: Validated[AccountCode],
       name: AccountName,
-      consumptionTaxId: ConsumptionTaxId
+      consumptionTaxId: Validated[ConsumptionTaxId]
   )
 
   sealed trait CreateAccountError
